@@ -1,0 +1,49 @@
+<?php
+
+namespace GeekBrains\LevelTwo\Blog\Http\Actions\Users;
+
+use GeekBrains\LevelTwo\Blog\Exceptions\AppException\HttpException;
+use GeekBrains\LevelTwo\Blog\Http\Actions\ActionInterface;
+use GeekBrains\LevelTwo\Blog\Http\Request;
+use GeekBrains\LevelTwo\Blog\Http\Response;
+use GeekBrains\LevelTwo\Blog\Repositories\Interfaces\UsersRepositoryInterface;
+use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\Http\ErrorResponse;
+use GeekBrains\LevelTwo\Blog\User;
+use GeekBrains\LevelTwo\Person\Name;
+use GeekBrains\LevelTwo\Blog\Http\SuccessfulResponse;
+
+class CreateUser implements ActionInterface
+{
+
+    public function __construct(
+        private UsersRepositoryInterface $usersRepository,
+    ) {
+    }
+
+    public function handle(Request $request): Response
+    {
+        try {
+            $newUserUuid = UUID::random();
+
+            $user = new User(
+                $newUserUuid,
+                $request->jsonBodyField('username'),
+                new Name(
+                    $request->jsonBodyField('first_name'),
+                    $request->jsonBodyField('last_name')
+                )
+            );
+
+        } catch (HttpException $e) {
+            return new ErrorResponse($e->getMessage());
+
+}
+
+        $this->usersRepository->save($user);
+
+        return new SuccessfulResponse([
+            'uuid' => (string)$newUserUuid,
+        ]);
+    }
+}
