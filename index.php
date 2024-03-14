@@ -6,4 +6,4 @@ include "vendor/autoload.php";
 
 $user = new User();
 
-print_r($user);
+echo $user;
