@@ -1,3 +1,9 @@
 <?php 
-echo "Start project";
-echo PHP_EOL;
+use Admin\Blog\User;
+
+include "vendor/autoload.php";
+
+
+$user = new User();
+
+print_r($user);

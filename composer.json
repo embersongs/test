@@ -1,0 +1,15 @@
+{
+    "name": "admin/blog",
+    "autoload": {
+        "psr-4": {
+            "Admin\\Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ember",
+            "email": "evebay@mail.ru"
+        }
+    ],
+    "require": {}
+}
