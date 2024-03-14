@@ -1,3 +1,3 @@
 <?php 
 echo "Start project";
-echo "<br>";
+echo PHP_EOL;
