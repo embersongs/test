@@ -1,5 +1,5 @@
 <?php 
-use Admin\Blog\User;
+use Admin\Blog\Models\User;
 
 include "vendor/autoload.php";
 

@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Blog;
+namespace Admin\Blog\Models;
 
 class User {
     public $name = "user";
